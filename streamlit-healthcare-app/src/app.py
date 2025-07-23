@@ -5,15 +5,17 @@ import numpy as np
 # Tải mô hình đã huấn luyện và bộ chuẩn hóa
 import os
 
-# Lấy đường dẫn tuyệt đối đến thư mục hiện tại (src)
+# Đường dẫn tuyệt đối đến file hiện tại
 current_dir = os.path.dirname(__file__)
 
-# Nạp mô hình
-model_path = os.path.join(current_dir, 'random_forest_model.sav')
-model = pickle.load(open(model_path, 'rb'))
+# Tải model và scaler từ thư mục cha (gốc repo)
+model_path = os.path.join(current_dir, '..', '..', 'random_forest_model.sav')
+scaler_path = os.path.join(current_dir, '..', '..', 'scaler.sav')
 
-# Nạp scaler
-scaler_path = os.path.join(current_dir, 'scaler.sav')
+print("Model path:", model_path)
+print("Scaler path:", scaler_path)
+
+model = pickle.load(open(model_path, 'rb'))
 scaler = pickle.load(open(scaler_path, 'rb'))
 
 # Hàm để dự đoán đột quỵ
