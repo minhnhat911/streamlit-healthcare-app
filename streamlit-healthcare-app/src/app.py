@@ -3,8 +3,18 @@ import pickle
 import numpy as np
 
 # Tải mô hình đã huấn luyện và bộ chuẩn hóa
-model = pickle.load(open('random_forest_model.sav', 'rb'))
-scaler = pickle.load(open('scaler.sav', 'rb'))
+import os
+
+# Lấy đường dẫn tuyệt đối đến thư mục hiện tại (src)
+current_dir = os.path.dirname(__file__)
+
+# Nạp mô hình
+model_path = os.path.join(current_dir, 'random_forest_model.sav')
+model = pickle.load(open(model_path, 'rb'))
+
+# Nạp scaler
+scaler_path = os.path.join(current_dir, 'scaler.sav')
+scaler = pickle.load(open(scaler_path, 'rb'))
 
 # Hàm để dự đoán đột quỵ
 def predict_stroke(features):
