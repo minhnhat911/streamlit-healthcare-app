@@ -5,16 +5,21 @@ import numpy as np
 # Tải mô hình đã huấn luyện và bộ chuẩn hóa
 import os
 
-# Đường dẫn tuyệt đối đến file hiện tại
-current_dir = os.path.dirname(__file__)
+# Lấy đường dẫn thư mục hiện tại
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Tải model và scaler từ thư mục cha (gốc repo)
-model_path = os.path.join(current_dir, '..', '..', 'random_forest_model.sav')
-scaler_path = os.path.join(current_dir, '..', '..', 'scaler.sav')
+# Lấy thư mục gốc của project (gồm model và scaler)
+root_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
 
+# Tạo đường dẫn tới model và scaler
+model_path = os.path.join(root_dir, 'random_forest_model.sav')
+scaler_path = os.path.join(root_dir, 'scaler.sav')
+
+# In ra để kiểm tra
 print("Model path:", model_path)
 print("Scaler path:", scaler_path)
 
+# Load file
 model = pickle.load(open(model_path, 'rb'))
 scaler = pickle.load(open(scaler_path, 'rb'))
 
