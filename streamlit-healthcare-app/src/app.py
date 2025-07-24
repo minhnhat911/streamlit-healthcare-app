@@ -14,7 +14,14 @@ model_path = os.path.join(current_dir, 'random_forest_model.sav')
 # Load mô hình
 with open(model_path, 'rb') as f:
     model = pickle.load(f)
+    
+# Tạo đường dẫn đến file scaler
+scaler_path = os.path.join(current_dir, 'scaler.sav')
 
+# Load scaler
+with open(scaler_path, 'rb') as f:
+    scaler = pickle.load(f)
+    
 # Hàm để dự đoán đột quỵ
 def predict_stroke(features):
     features = np.array(features).reshape(1, -1)
