@@ -5,23 +5,15 @@ import numpy as np
 # Tải mô hình đã huấn luyện và bộ chuẩn hóa
 import os
 
-# Lấy đường dẫn thư mục hiện tại
+# Lấy đường dẫn thư mục hiện tại của file app.py
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Lấy thư mục gốc của project (gồm model và scaler)
-root_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
+# Tạo đường dẫn đầy đủ đến file mô hình
+model_path = os.path.join(current_dir, 'random_forest_model.sav')
 
-# Tạo đường dẫn tới model và scaler
-model_path = os.path.join(root_dir, 'random_forest_model.sav')
-scaler_path = os.path.join(root_dir, 'scaler.sav')
-
-# In ra để kiểm tra
-print("Model path:", model_path)
-print("Scaler path:", scaler_path)
-
-# Load file
-model = pickle.load(open(model_path, 'rb'))
-scaler = pickle.load(open(scaler_path, 'rb'))
+# Load mô hình
+with open(model_path, 'rb') as f:
+    model = pickle.load(f)
 
 # Hàm để dự đoán đột quỵ
 def predict_stroke(features):
