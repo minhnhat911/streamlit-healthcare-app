@@ -2,26 +2,24 @@ import streamlit as st
 import pickle
 import numpy as np
 
-# Tải mô hình đã huấn luyện và bộ chuẩn hóa
-import os
+# Nếu các file mô hình ở cùng thư mục với app.py
+model_path = 'random_forest_model.sav'
+scaler_path = 'scaler.sav'
 
-# Lấy đường dẫn thư mục hiện tại chứa app.py
-current_dir = os.path.dirname(os.path.abspath(__file__))
+# Tải mô hình và scaler
+try:
+    with open(model_path, 'rb') as f:
+        model = pickle.load(f)
 
-# Ghép đường dẫn file mô hình
-model_path = os.path.join(current_dir, 'random_forest_model.sav')
-scaler_path = os.path.join(current_dir, 'scaler.sav')
+    with open(scaler_path, 'rb') as f:
+        scaler = pickle.load(f)
+    
+    st.write("Model and scaler loaded successfully!")
 
-# In để kiểm tra đường dẫn thực tế
-print("Model path:", model_path)
-print("Scaler path:", scaler_path)
-
-# Load model và scaler
-with open(model_path, 'rb') as f:
-    model = pickle.load(f)
-
-with open(scaler_path, 'rb') as f:
-    scaler = pickle.load(f)
+except FileNotFoundError:
+    st.error(f"Error: One of the files was not found. Please ensure that '{model_path}' and '{scaler_path}' are in the same directory as your app file.")
+except Exception as e:
+    st.error(f"An unexpected error occurred during file loading: {e}")
     
 # Hàm để dự đoán đột quỵ
 def predict_stroke(features):
