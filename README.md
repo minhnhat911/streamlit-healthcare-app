@@ -1,1 +1,1 @@
-#streamlit-healthcare-app
+Healthcare-App – AI system to predict individual stroke risk. Built a full pipeline (cleaning, encoding, scaling, SMOTE) and evaluated 7 models (Logistic Regression, SVM, Naive Bayes, Decision Tree, Random Forest, XGBoost, LightGBM). Tuned hyperparameters with stratified CV, selected the best model by ROC-AUC/PR-AUC, calibrated probabilities, and delivered a Flask/FastAPI API plus a Streamlit dashboard with SHAP explanations. Ensured data privacy, bias checks, and drift monitoring. 
